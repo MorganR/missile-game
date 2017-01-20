@@ -47,7 +47,7 @@ class Missile {
   // Has the missile reached its destination?
 
   bool hasReachedDestination() {
-    return false;
+    return velocity.y > 0 ? pos1.y >= destY : pos1.y <= destY;
   }
 
  private:
