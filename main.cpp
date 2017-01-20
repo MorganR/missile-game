@@ -57,9 +57,11 @@ void mouseClick( int button, int buttonState, int x, int y )
   if (buttonState == GLUT_DOWN) {
 
     // Calculate the world coordinates of mouse (x,y)
+    // x, y - The position of the mouse in pixel coordinates with (0,0) at the top left corner of the game window
+    // wx, wy - The position of the mouse in world coordinates, going [0,1] in each direction with (0,0) in the bottom left corner
 
-    float wx = x;
-    float wy = y;
+    float wx = (float)x / WINDOW_WIDTH;
+    float wy = (float)(y - WINDOW_HEIGHT) / WINDOW_HEIGHT * -1.0;
 
     // Shoot from silo 0, 1, or 2
 
