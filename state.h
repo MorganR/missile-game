@@ -36,6 +36,10 @@ class State {
 
   float worldTop;		// world y coordinate at top of window
 
+  // Gets the current probability of generating a new incoming missile.
+  // The probability increases with time.
+  float getMissileProbability_();
+
   seq<Silo> silos;
   seq<City> cities;
   seq<Missile> missilesIn;

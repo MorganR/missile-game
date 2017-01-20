@@ -48,7 +48,7 @@ void State::updateState( float deltaT )
   // Generate some new missiles.  The rate of missle generation
   // should increase with time.
 
-  if (randIn01() < 0.10) {	// New missile with probability 10%
+  if (randIn01() < getMissileProbability_()) {	// New missile with probability 10%
 
     missilesIn.add( Missile( vector( randIn01(), worldTop, 0), // source
 			     vector( -0.02, -0.1, 0 ),   // velocity
@@ -161,4 +161,9 @@ void State::setupWorld()
   cities.add( City( vector( 0.6, 0, 0 ) ) );
   cities.add( City( vector( 0.7, 0, 0 ) ) );
   cities.add( City( vector( 0.8, 0, 0 ) ) );
+}
+
+float State::getMissileProbability_()
+{
+  return std::min(0.005 * currentTime, 0.10);
 }
