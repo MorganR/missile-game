@@ -99,7 +99,7 @@ void State::updateState( float deltaT )
 }
 
 
-// Fire a missile
+// Fire a missile to the given position
 
 void State::fireMissile( int siloIndex, float x, float y )
 
@@ -110,11 +110,12 @@ void State::fireMissile( int siloIndex, float x, float y )
 
     silos[siloIndex].decrMissiles();
 
-    // CHANGE THIS
+    vector siloPos = silos[siloIndex].position();
+    vector direction = vector(x - siloPos.x, y - siloPos.y, 0).normalize();
 
-    missilesOut.add( Missile( silos[siloIndex].position(),   // source
-			      speed * vector(randIn01(),randIn01(),0), // velocity
-			      0,                             // destination y
+    missilesOut.add( Missile( siloPos,   // source
+			      speed * direction, // velocity
+			      y,                             // destination y
 			      vector( 0,1,1 ) ) );           // colour
   }
 }
