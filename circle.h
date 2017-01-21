@@ -48,6 +48,11 @@ class Circle {
     return maxR;
   }
 
+  bool intersects(vector otherPos)
+  {
+    return (otherPos - pos).length() <= r;
+  }
+
  private:
 
   vector pos;			// centre

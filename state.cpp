@@ -74,24 +74,46 @@ void State::updateState( float deltaT )
         Circle(missilesOut[i].position(),
           0.2, // speed
           0.07, // max radius
-      outgoingMissileColour));
+          outgoingMissileColour));
       missilesOut.remove(i);
       i--;
     }
 
-  // Look for terminating explosions
+  seq<Circle> newExplosions;
 
-  for (i=0; i<explosions.size(); i++)
+  for (i = 0; i < explosions.size(); i++)
+  {
+    // Look for terminating explosions
     if (explosions[i].radius() >= explosions[i].maxRadius()) {
       // CHANGE THIS: CHECK FOR DESTROYED CITY OR SILO
       explosions.remove(i);
       i--;
+      continue;
     }
 
-  // Look for incoming missiles that hit an explosion and are
-  // destroyed
+    int j = 0;
 
-     // ADD CODE HERE
+    // Look for incoming missiles that hit an explosion and are
+    // destroyed
+
+    for (j = 0; j < missilesIn.size(); j++)
+    {
+      if (explosions[i].intersects(missilesIn[j].position()))
+      {
+        newExplosions.add(
+          Circle(missilesIn[j].position(),
+            0.2,
+            0.06,
+            incomingMissileColour));
+        missilesIn.remove(j--);
+      }
+    }
+  }
+
+  for (i = 0; i < newExplosions.size(); i++)
+  {
+    explosions.add(newExplosions[i]);
+  }
 
   // Update all the moving objects
 

@@ -29,19 +29,19 @@ and then try to port to Linux on the last day.
 Modify the code as follows:
 
 1. In mouseClick(), calculate the (wx,wy) world coordinates of
-   the (x,y) mouse position.
+   the (x,y) mouse position. DONE
 
 2. Modify Missile::hasReachedDestination() to return the correct
-   value.
+   value. DONE
 
 3. Modify State::fireMissile() to create the correct missile, based
-   upon the target (x,y) position.
+   upon the target (x,y) position. DONE
 
 4. Modify State::updateState() to
 
     4a. Generate a new missile with probability that increases 
         with time, and is randomly aimed at somewhere on the 
-        ground.
+        ground. MAYBE DONE?
 
     4b. Add explosions for missiles (both incoming and outgoing)
         that have reached their desitinations.
