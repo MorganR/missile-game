@@ -164,6 +164,8 @@ void State::fireMissile( int siloIndex, float x, float y )
 {
   const float speed = 0.3;
     
+  siloIndex = std::min(siloIndex, silos.size() - 1);
+
   if (silos[siloIndex].canShoot()) {
 
     silos[siloIndex].decrMissiles();
