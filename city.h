@@ -21,19 +21,32 @@ class City : public Building {
 
   void draw() {
 
-    glColor3f( 1,1,1 );
+    glColor3f( 1, (float)health/maxHealth, (float)health/maxHealth );
 
     glBegin( GL_POLYGON );
-    glVertex2f( pos.x + .04, pos.y );
-    glVertex2f( pos.x + .04, pos.y + .03 );
-    glVertex2f( pos.x - .04, pos.y + .03 );
-    glVertex2f( pos.x - .04, pos.y );
+    glVertex2f( pos.x + halfWidth, pos.y );
+    glVertex2f( pos.x + halfWidth, pos.y + height );
+    glVertex2f( pos.x - halfWidth, pos.y + height );
+    glVertex2f( pos.x - halfWidth, pos.y );
     glEnd();
   }
 
-  bool isHit( vector missilePos, float radius ); 
+  bool isHit( vector explosionPos, float explosionR )
+  {
+    vector vectorBetween = (pos - explosionPos);
+    if (vectorBetween.length() < explosionR)
+      return true;
+    vector closestPoint = explosionPos + explosionR * vectorBetween.normalize();
+    return closestPoint.x <= (pos.x + halfWidth)
+      && closestPoint.x >= (pos.x - halfWidth)
+      && closestPoint.y <= (pos.y + height)
+      && closestPoint.y >= pos.y;
+  }
+
   private: 
     const static int maxHealth = 5;
+    const static float halfWidth = 0.04;
+    const static float height = 0.03;
 };
   
 

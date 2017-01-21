@@ -48,6 +48,10 @@ class Circle {
     return maxR;
   }
 
+  vector position() {
+    return pos;
+  }
+
   bool intersects(vector otherPos)
   {
     return (otherPos - pos).length() <= r;

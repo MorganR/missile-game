@@ -79,19 +79,47 @@ void State::updateState( float deltaT )
       i--;
     }
 
+  // Holds new explosions from missile destruction
+  // Used to avoid looping over new explosions within the following loop
   seq<Circle> newExplosions;
 
   for (i = 0; i < explosions.size(); i++)
   {
+    int j;
     // Look for terminating explosions
     if (explosions[i].radius() >= explosions[i].maxRadius()) {
       // CHANGE THIS: CHECK FOR DESTROYED CITY OR SILO
+      for (j = 0; j < silos.size(); j++)
+      {
+        if (silos[j].isHit(explosions[i].position(), explosions[i].maxRadius()))
+        {
+          std::cout << "Damaging silo " << j << std::endl;
+          silos[j].damage();
+          if (silos[j].isDestroyed())
+          {
+            silos.remove(j--);
+          }
+        }
+      }
+
+      for (j = 0; j < cities.size(); j++)
+      {
+        if (cities[j].isHit(explosions[i].position(), explosions[i].maxRadius()))
+        {
+          std::cout << "Damaging city " << j << std::endl;
+          cities[j].damage();
+          if (cities[j].isDestroyed())
+          {
+            cities.remove(j--);
+          }
+        }
+      }
+
       explosions.remove(i);
       i--;
       continue;
     }
 
-    int j = 0;
 
     // Look for incoming missiles that hit an explosion and are
     // destroyed
@@ -110,6 +138,7 @@ void State::updateState( float deltaT )
     }
   }
 
+  // Move new explosions into the main explosions sequence
   for (i = 0; i < newExplosions.size(); i++)
   {
     explosions.add(newExplosions[i]);
