@@ -50,9 +50,13 @@ void display()
   glutSwapBuffers();
 }
 
+void convertMouseCoordsToWorldCoords(int x, int y, float& wx, float& wy)
+{
+  wx = (float)x / WINDOW_WIDTH * (WORLD_RIGHT - WORLD_LEFT) + WORLD_LEFT;
+  wy = (1.0 - (float)y / WINDOW_HEIGHT) * (worldTop - WORLD_BOTTOM) + WORLD_BOTTOM;
+}
 
 void mouseClick( int button, int buttonState, int x, int y )
-
 {
   if (buttonState == GLUT_DOWN) {
 
@@ -60,8 +64,9 @@ void mouseClick( int button, int buttonState, int x, int y )
     // x, y - The position of the mouse in pixel coordinates with (0,0) at the top left corner of the game window
     // wx, wy - The position of the mouse in world coordinates, going [0,1] in each direction with (0,0) in the bottom left corner
 
-    float wx = (float)x / WINDOW_WIDTH;
-    float wy = (float)(y - WINDOW_HEIGHT) / WINDOW_HEIGHT * -1.0;
+    float wx, wy;
+    convertMouseCoordsToWorldCoords(x, y, wx, wy);
+    std::cout << "World coords for mouse pos: (" << wx << ", " << wy << ")" << std::endl;
 
     // Shoot from silo 0, 1, or 2
 
