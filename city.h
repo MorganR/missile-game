@@ -15,7 +15,7 @@ class City : public Building {
 
   City() {}
 
-  City( vector pos ) : Building( pos ) {}
+  City( vector pos ) : Building( pos, maxHealth ) {}
 
   // Draw the city
 
@@ -32,6 +32,8 @@ class City : public Building {
   }
 
   bool isHit( vector missilePos, float radius ); 
+  private: 
+    const static int maxHealth = 5;
 };
   
 

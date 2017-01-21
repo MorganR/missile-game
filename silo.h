@@ -15,8 +15,7 @@ class Silo : public Building {
 
   Silo() {}
 
-  Silo( vector pos ) : Building( pos ) {
-
+  Silo( vector pos ) : Building( pos, maxHealth) {
     roundsLeft = 15;
   }
 
@@ -36,7 +35,7 @@ class Silo : public Building {
 
   void draw() {
 
-    glColor3f( 1,1,1 );
+    glColor3f( 1, (float)health / maxHealth, (float)health / maxHealth );
 
     glBegin( GL_POLYGON );
     for (float theta=0; theta<M_PI+0.01; theta += M_PI/32)
@@ -45,7 +44,7 @@ class Silo : public Building {
   }
 
  private:
-
+  const static int maxHealth = 3;
   int roundsLeft;
 };
   
