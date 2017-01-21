@@ -44,7 +44,7 @@ class Silo : public Building {
   }
 
  private:
-  const static int maxHealth = 3;
+  const static int maxHealth = 15;
   int roundsLeft;
 };
   
