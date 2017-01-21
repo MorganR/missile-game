@@ -31,7 +31,6 @@ float worldTop;			// calculated in main()
 
 State *state;
 
-
 // ----------------------------------------------------------------
 //
 // Below are all the OpenGL event handlers.
@@ -56,31 +55,36 @@ void convertMouseCoordsToWorldCoords(int x, int y, float& wx, float& wy)
   wy = (1.0 - (float)y / WINDOW_HEIGHT) * (worldTop - WORLD_BOTTOM) + WORLD_BOTTOM;
 }
 
-void mouseClick( int button, int buttonState, int x, int y )
+void fireMissile(int silo, int mouseX, int mouseY)
 {
-  if (buttonState == GLUT_DOWN) {
-
     // Calculate the world coordinates of mouse (x,y)
     // x, y - The position of the mouse in pixel coordinates with (0,0) at the top left corner of the game window
     // wx, wy - The position of the mouse in world coordinates, going [0,1] in each direction with (0,0) in the bottom left corner
 
     float wx, wy;
-    convertMouseCoordsToWorldCoords(x, y, wx, wy);
+    convertMouseCoordsToWorldCoords(mouseX, mouseY, wx, wy);
+
+    state->fireMissile(silo, wx, wy);
+}
+
+void mouseClick( int button, int buttonState, int x, int y )
+{
+  if (buttonState == GLUT_DOWN) {
 
     // Shoot from silo 0, 1, or 2
 
     switch (button) {
 
     case GLUT_LEFT_BUTTON:
-      state->fireMissile( 0, wx, wy );
+      fireMissile( 0, x, y );
       break;
 
     case GLUT_MIDDLE_BUTTON:
-      state->fireMissile( 1, wx, wy );
+      fireMissile( 1, x, y );
       break;
 
     case GLUT_RIGHT_BUTTON:
-      state->fireMissile( 2, wx, wy );
+      fireMissile( 2, x, y );
       break;
     }
   }
@@ -88,13 +92,22 @@ void mouseClick( int button, int buttonState, int x, int y )
   glutPostRedisplay();
 }
 
-
 void keyPress( unsigned char c, int x, int y )
 
 {
   switch (c) {
-  case 27:
-    exit(0);
+    case 'a':
+      fireMissile(0, x, y);
+      break;
+    case 's':
+      fireMissile(1, x, y);
+      break;
+    case 'd':
+      fireMissile(2, x, y);
+      break;
+    case 27:
+      glutLeaveMainLoop();
+      exit(0);
   }
 
   glutPostRedisplay();
