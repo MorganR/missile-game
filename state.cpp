@@ -53,21 +53,28 @@ void State::updateState( float deltaT )
     missilesIn.add( Missile( vector( randIn01(), worldTop, 0), // source
 			     vector( -0.02, -0.1, 0 ),   // velocity
 			     0,                      // destination y
-			     vector( 1,1,0 ) ) );    // colour
+			     incomingMissileColour ) );    // colour
   }
 
   // Look for terminating missiles
 
   for (i=0; i<missilesIn.size(); i++)
     if (missilesIn[i].hasReachedDestination()) {
-      // CHANGE THIS: ADD AN EXPLOSION
+      explosions.add(Circle(missilesIn[i].position(),
+        0.2, // speed
+        0.05, // max radius
+        incomingMissileColour));
       missilesIn.remove(i);
       i--;
     }
 
   for (i=0; i<missilesOut.size(); i++)
     if (missilesOut[i].hasReachedDestination()) {
-      // CHANGE THIS: ADD AN EXPLOSION
+      explosions.add(
+        Circle(missilesOut[i].position(),
+          0.2, // speed
+          0.07, // max radius
+      outgoingMissileColour));
       missilesOut.remove(i);
       i--;
     }
@@ -116,7 +123,7 @@ void State::fireMissile( int siloIndex, float x, float y )
     missilesOut.add( Missile( siloPos,   // source
 			      speed * direction, // velocity
 			      y,                             // destination y
-			      vector( 0,1,1 ) ) );           // colour
+			      outgoingMissileColour ) );           // colour
   }
 }
 

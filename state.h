@@ -30,6 +30,9 @@ class State {
 
  private:
 
+  const vector incomingMissileColour = vector(1.0, 1.0, 0.0);
+  const vector outgoingMissileColour = vector(0.0, 1.0, 1.0);
+
   float currentTime;		// current game time
 
   float timeOfIncomingFlight;	// time taken for incoming missile to reach bottom

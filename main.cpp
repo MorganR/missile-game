@@ -66,7 +66,6 @@ void mouseClick( int button, int buttonState, int x, int y )
 
     float wx, wy;
     convertMouseCoordsToWorldCoords(x, y, wx, wy);
-    std::cout << "World coords for mouse pos: (" << wx << ", " << wy << ")" << std::endl;
 
     // Shoot from silo 0, 1, or 2
 
