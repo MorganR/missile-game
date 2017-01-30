@@ -52,6 +52,7 @@ class Circle {
     return pos;
   }
 
+  // Returns true if the given vector is on the border of or within the circle.
   bool intersects(vector otherPos)
   {
     return (otherPos - pos).length() <= r;

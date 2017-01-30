@@ -93,7 +93,6 @@ void State::updateState( float deltaT )
       {
         if (silos[j].isHit(explosions[i].position(), explosions[i].maxRadius()))
         {
-          std::cout << "Damaging silo " << j << std::endl;
           silos[j].damage();
           if (silos[j].isDestroyed())
           {
@@ -106,7 +105,6 @@ void State::updateState( float deltaT )
       {
         if (cities[j].isHit(explosions[i].position(), explosions[i].maxRadius()))
         {
-          std::cout << "Damaging city " << j << std::endl;
           cities[j].damage();
           if (cities[j].isDestroyed())
           {

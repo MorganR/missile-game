@@ -31,9 +31,10 @@ class City : public Building {
     glEnd();
   }
 
+  // Check if the given explosion's circle intersects with the city rectangle
   bool isHit( vector explosionPos, float explosionR )
   {
-    vector vectorBetween = (pos - explosionPos);
+    vector vectorBetween = (pos - explosionPos); // The vector between the center of the explosion and the center of the city.
     if (vectorBetween.length() < explosionR)
       return true;
     vector closestPoint = explosionPos + explosionR * vectorBetween.normalize();

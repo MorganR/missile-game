@@ -44,13 +44,13 @@ Modify the code as follows:
         ground. MAYBE DONE?
 
     4b. Add explosions for missiles (both incoming and outgoing)
-        that have reached their desitinations.
+        that have reached their desitinations. DONE
 
     4c. Check for a destroyed city or silo, and remove it from
-        the corresponding list.
+        the corresponding list. DONE
 
     4d. Check for the destruction of an incoming missile, and
-        remove such missile from the missilesIn list.
+        remove such missile from the missilesIn list. DONE
 
 5. Add two novel features of your own.  Some suggestions might be
 
