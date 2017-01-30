@@ -41,7 +41,7 @@ Modify the code as follows:
 
     4a. Generate a new missile with probability that increases 
         with time, and is randomly aimed at somewhere on the 
-        ground. MAYBE DONE?
+        ground. DONE
 
     4b. Add explosions for missiles (both incoming and outgoing)
         that have reached their desitinations. DONE

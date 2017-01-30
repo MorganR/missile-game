@@ -48,10 +48,10 @@ void State::updateState( float deltaT )
   // Generate some new missiles.  The rate of missle generation
   // should increase with time.
 
-  if (randIn01() < getMissileProbability_()) {	// New missile with probability 10%
-
+  if (randIn01() < getMissileProbability_()) {	// New missile with time varying probability
+    float xVel = 0.02 + -0.04 * randIn01();
     missilesIn.add( Missile( vector( randIn01(), worldTop, 0), // source
-			     vector( -0.02, -0.1, 0 ),   // velocity
+			     vector( xVel , -0.1, 0 ),   // velocity
 			     0,                      // destination y
 			     incomingMissileColour ) );    // colour
   }
