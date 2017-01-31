@@ -3,6 +3,7 @@
 
 #include "headers.h"
 
+#include "TextGenerator.h"
 
 // Window and world dimensions
 
@@ -176,6 +177,8 @@ int main( int argc, char **argv )
   gluOrtho2D( WORLD_LEFT, WORLD_RIGHT, WORLD_BOTTOM, worldTop );
 
   std::cout << "top = " << worldTop  << std::endl;
+
+  TextGenerator::Initialize();
 
   state = new State( worldTop );
 
