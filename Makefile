@@ -1,7 +1,7 @@
 # This Makefile works only for Linux.
 
-LIBS = -lglut -lGLU -lGL -lm -I/usr/include/freetype2
-CXXFLAGS = -g -DLINUX
+LIBS = -lglut -lGLU -lGL -lm -lfreetype
+CXXFLAGS = -g -DLINUX -I/usr/include/freetype2
 CXX = g++
 
 PROG = missile
