@@ -13,6 +13,7 @@ class TextGenerator {
     static bool isInitialized;
     
     static void Initialize();
+    static void PrintChar(int charCode);
 };
 
 #endif
