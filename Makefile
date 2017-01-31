@@ -1,6 +1,6 @@
 # This Makefile works only for Linux.
 
-LIBS = -lglut -lGLU -lGL -lm
+LIBS = -lglut -lGLU -lGL -lm -I/usr/include/freetype2
 CXXFLAGS = -g -DLINUX
 CXX = g++
 
