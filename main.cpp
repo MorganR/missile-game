@@ -179,6 +179,7 @@ int main( int argc, char **argv )
   std::cout << "top = " << worldTop  << std::endl;
 
   TextGenerator::Initialize();
+  TextGenerator::PrintChar('A');
 
   state = new State( worldTop );
 
