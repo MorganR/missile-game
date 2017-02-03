@@ -17,8 +17,8 @@
 #define WORLD_BOTTOM -0.02
 
 float worldTop;			// calculated in main()
-float windowWidth;
-float windowHeight;
+float windowWidth; // updated on reshape
+float windowHeight; // updated on reshape
 
 
 // ----------------------------------------------------------------
@@ -52,16 +52,16 @@ void display()
 
 void convertMouseCoordsToWorldCoords(int x, int y, float& wx, float& wy)
 {
+  // Calculate the world coordinates of mouse (x,y)
+  // x, y - The position of the mouse in pixel coordinates with (0,0) at the top left corner of the game window
+  // wx, wy - The position of the mouse in world coordinates, going [0,1] in each direction with (0,0) in the bottom left corner
+
   wx = (float)x / windowWidth * (WORLD_RIGHT - WORLD_LEFT) + WORLD_LEFT;
   wy = (1.0 - (float)y / windowHeight) * (worldTop - WORLD_BOTTOM) + WORLD_BOTTOM;
 }
 
 void fireMissile(int silo, int mouseX, int mouseY)
 {
-    // Calculate the world coordinates of mouse (x,y)
-    // x, y - The position of the mouse in pixel coordinates with (0,0) at the top left corner of the game window
-    // wx, wy - The position of the mouse in world coordinates, going [0,1] in each direction with (0,0) in the bottom left corner
-
     float wx, wy;
     convertMouseCoordsToWorldCoords(mouseX, mouseY, wx, wy);
 
