@@ -1,11 +1,11 @@
 # This Makefile works only for Linux.
 
-LIBS = -lfreetype -lglut -lGLU -lGL -lm -lGLEW
+LIBS = -lglut -lGLU -lGL -lm
 CXXFLAGS = -g -DLINUX -I/usr/include/freetype2
 CXX = g++
 
 PROG = missile
-OBJS = main.o vector.o state.o TextGenerator.o gpuProgram.o
+OBJS = main.o vector.o state.o TextGenerator.o
 
 .C.o:
 	$(CXX) $(CXXFLAGS) -c $<
@@ -25,7 +25,6 @@ depend:
 
 # DO NOT DELETE
 
-gpuProgram.o: gpuProgram.h
 TextGenerator.o: TextGenerator.h
 buildings.o: vector.h
 circle.o: vector.h
