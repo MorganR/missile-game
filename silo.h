@@ -6,6 +6,7 @@
 
 #include "headers.h"
 #include "buildings.h"
+#include "TextGenerator.h"
 
 class Silo : public Building {
  public:
@@ -50,6 +51,10 @@ class Silo : public Building {
     for (float theta=0; theta<M_PI+0.01; theta += M_PI/32)
       glVertex2f( pos.x + radius * cos(theta), pos.y + radius * sin(theta) );
     glEnd();
+
+    char buffer[5];
+    sprintf(buffer, "%d", roundsLeft);
+    TextGenerator::PrintString(buffer, pos.x - 0.008, pos.y + 0.013, GLUT_BITMAP_TIMES_ROMAN_10, vector(0.0, 0.0, 0.0));
   }
 
  private:
