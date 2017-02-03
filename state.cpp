@@ -25,7 +25,7 @@ void State::draw()
     TextGenerator::PrintString("GAME OVER", 0.37, 0.38, GLUT_BITMAP_TIMES_ROMAN_24, vector(1.0, 0.0, 0.0));
     std::stringstream sstream;
     sstream << "You survived for: " << currentTime << " seconds";
-    TextGenerator::PrintString(sstream.str().c_str(), 0.39, 0.28, GLUT_BITMAP_TIMES_ROMAN_10, vector(1.0, 0.0, 0.0));
+    TextGenerator::PrintString(sstream.str().c_str(), 0.375, 0.28, GLUT_BITMAP_TIMES_ROMAN_10, vector(1.0, 0.0, 0.0));
     return;
   }
 
@@ -68,7 +68,7 @@ void State::updateState( float deltaT )
   // should increase with time.
 
   if (randIn01() < getMissileProbability_()) {	// New missile with time varying probability
-    float xVel = 0.02 + -0.04 * randIn01();
+    float xVel = 0.02 + -0.04 * randIn01(); // choose a random direction within a reasonable range
     missilesIn.add( Missile( vector( randIn01(), worldTop, 0), // source
 			     vector( xVel , -0.1, 0 ),   // velocity
 			     0,                      // destination y
