@@ -5,7 +5,7 @@
 
 
 #include "headers.h"
-
+#include <iostream>
 
 class GPUProgram {
  public:
@@ -35,6 +35,8 @@ class GPUProgram {
       std::cerr << "Fragment shader file '" << fsFile << "' not found." << std::endl;
       return;
     }
+    
+    std::cout << "Initializing GPUProgram." << std::endl;
     
     init( vsText, fsText );
   }
