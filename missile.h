@@ -26,9 +26,10 @@ class Missile {
   // Draw the missile and its trail
 
   void draw() {
-    glColor3f( colour.x, colour.y, colour.z );
     glBegin( GL_LINES );
+    glColor4f( 0.0, 0.0, 0.0, 0.0 );
     glVertex2f( pos0.x, pos0.y );
+    glColor4f( colour.x, colour.y, colour.z , 1.0);
     glVertex2f( pos1.x, pos1.y );
     glEnd();
   }
