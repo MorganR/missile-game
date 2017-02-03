@@ -17,6 +17,8 @@
 #define WORLD_BOTTOM -0.02
 
 float worldTop;			// calculated in main()
+float windowWidth;
+float windowHeight;
 
 
 // ----------------------------------------------------------------
@@ -50,8 +52,8 @@ void display()
 
 void convertMouseCoordsToWorldCoords(int x, int y, float& wx, float& wy)
 {
-  wx = (float)x / WINDOW_WIDTH * (WORLD_RIGHT - WORLD_LEFT) + WORLD_LEFT;
-  wy = (1.0 - (float)y / WINDOW_HEIGHT) * (worldTop - WORLD_BOTTOM) + WORLD_BOTTOM;
+  wx = (float)x / windowWidth * (WORLD_RIGHT - WORLD_LEFT) + WORLD_LEFT;
+  wy = (1.0 - (float)y / windowHeight) * (worldTop - WORLD_BOTTOM) + WORLD_BOTTOM;
 }
 
 void fireMissile(int silo, int mouseX, int mouseY)
@@ -112,6 +114,14 @@ void keyPress( unsigned char c, int x, int y )
   glutPostRedisplay();
 }
 
+void reshape(int width, int height)
+{
+  glViewport(0,0,width,height);
+
+  windowWidth = width;
+  windowHeight = height;
+}
+
 
 void idleAction()
 
@@ -165,11 +175,14 @@ int main( int argc, char **argv )
   glutInitWindowSize( WINDOW_WIDTH, WINDOW_HEIGHT );
   glutCreateWindow( "Missile Defence" );
 
+  glutReshapeFunc( reshape );
   glutDisplayFunc( display );
   glutMouseFunc( mouseClick );
   glutKeyboardFunc( keyPress );
   glutIdleFunc( idleAction );
 
+  windowWidth = WINDOW_WIDTH;
+  windowHeight = WINDOW_HEIGHT;
   worldTop = (WORLD_RIGHT - WORLD_LEFT) / (float) WINDOW_WIDTH * WINDOW_HEIGHT + WORLD_BOTTOM; 
 
   gluOrtho2D( WORLD_LEFT, WORLD_RIGHT, WORLD_BOTTOM, worldTop );
