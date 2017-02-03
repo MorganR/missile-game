@@ -59,6 +59,16 @@ public:
   vector operator ^ (vector p)	/* cross product */
     { return vector( y*p.z-p.y*z, -(x*p.z-p.x*z), x*p.y-p.x*y ); }
 
+  vector operator * (float f)
+  {
+    return vector(x*f, y*f, z*f);
+  }
+
+  vector operator / (float f)
+  {
+    return vector(x / f, y / f, z / f);
+  }
+
   vector normalize() {
     float len;
     len = sqrt( x*x + y*y + z*z );

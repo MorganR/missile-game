@@ -20,6 +20,7 @@ class Missile {
     velocity = v;
     colour = c;
     destY = y;
+    maxLength = 0.2;
   }
 
   // Draw the missile and its trail
@@ -36,6 +37,19 @@ class Missile {
 
   void move( float deltaT ) {
     pos1 = pos1 + deltaT * velocity;
+    adjustTail();
+  }
+
+  // Adjust the tail length so the tail is <= maxTail;
+
+  void adjustTail()
+  {
+    vector p1To0 = pos0 - pos1;
+    float mag = p1To0.length();
+    if (mag > maxLength)
+    {
+      pos0 = (p1To0 / mag) * maxLength + pos1;
+    }
   }
 
   // Return the current position 
@@ -57,6 +71,7 @@ class Missile {
   vector velocity;		// velocity
   vector colour;		// colour of missile trail
   float  destY;			// y position at destination
+  float maxLength; // Maximum visible tail length
 };
 
 
