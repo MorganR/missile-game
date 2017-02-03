@@ -1,9 +1,12 @@
 // state.cpp
 
+#include <sstream>
 
 #include "headers.h"
 
 #include "state.h"
+
+#include "TextGenerator.h"
 
 
 // Draw each of the objects in the world
@@ -13,6 +16,18 @@ void State::draw()
 
 {
   int i;
+  
+  if (currentTime < 1)
+    TextGenerator::PrintString("GOOD LUCK", -0.24, 0.1, GLUT_BITMAP_TIMES_ROMAN_24);
+
+  if(isGameOver)
+  {
+    TextGenerator::PrintString("GAME OVER", -0.24, 0.1, GLUT_BITMAP_TIMES_ROMAN_24);
+    std::stringstream sstream;
+    sstream << "You survived for: " << currentTime << " seconds";
+    TextGenerator::PrintString(sstream.str().c_str(), -0.25, -0.3, GLUT_BITMAP_TIMES_ROMAN_10);
+    return;
+  }
 
   for (i=0; i<silos.size(); i++)
     silos[i].draw();
@@ -41,9 +56,13 @@ void State::updateState( float deltaT )
 {
   int i;
 
+  if (isGameOver)
+    return;
+
   // Update the time
 
   currentTime += deltaT;
+  timeSinceMissileUpdate += deltaT;
 
   // Generate some new missiles.  The rate of missle generation
   // should increase with time.
@@ -54,6 +73,15 @@ void State::updateState( float deltaT )
 			     vector( xVel , -0.1, 0 ),   // velocity
 			     0,                      // destination y
 			     incomingMissileColour ) );    // colour
+  }
+
+  if (timeSinceMissileUpdate > 7)
+  {
+    for (i = 0; i < silos.size(); i++)
+    {
+      silos[i].incrMissiles(5);
+    }
+    timeSinceMissileUpdate = 0;
   }
 
   // Look for terminating missiles
@@ -152,6 +180,8 @@ void State::updateState( float deltaT )
 
   for (i=0; i<explosions.size(); i++)
     explosions[i].expand( deltaT );
+
+  isGameOver = (silos.size() == 0 && cities.size() == 0);
 }
 
 

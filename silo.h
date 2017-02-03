@@ -26,6 +26,10 @@ class Silo : public Building {
     roundsLeft--;
   }
 
+  void incrMissiles(int num = 1) {
+    roundsLeft += num;
+  }
+
   vector position() {
     return pos;
   }

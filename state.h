@@ -20,6 +20,8 @@ class State {
 
   State( float topCoord ) {
     worldTop = topCoord;
+    isGameOver = false;
+    timeSinceMissileUpdate = 0;
     setupWorld();
   }
 
@@ -33,7 +35,11 @@ class State {
   const vector incomingMissileColour = vector(1.0, 1.0, 0.0);
   const vector outgoingMissileColour = vector(0.0, 1.0, 1.0);
 
+  bool isGameOver; // Has the user failed
+
   float currentTime;		// current game time
+
+  float timeSinceMissileUpdate;
 
   float timeOfIncomingFlight;	// time taken for incoming missile to reach bottom
 
