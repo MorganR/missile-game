@@ -259,5 +259,5 @@ void State::setupWorld()
 
 float State::getMissileProbability_()
 {
-  return std::min(0.005 * currentTime, 0.10);
+  return std::min(0.005 * currentTime, 0.15);
 }
