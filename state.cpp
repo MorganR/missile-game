@@ -192,6 +192,11 @@ void State::fireMissile( int siloIndex, float x, float y )
 {
   const float speed = 0.3;
     
+  if (silos.size() == 0)
+  {
+    return;
+  }
+
   siloIndex = std::min(siloIndex, silos.size() - 1);
 
   if (silos[siloIndex].canShoot()) {
